@@ -1,5 +1,5 @@
 //发送请求
-const sendRequest = (url, method) => {
+const ajaxRequest = (url, method) => {
   const promise = new Promise((resolve, reject) => {
     var xhr = new XMLHttpRequest()
     // 指定通信过程中状态改变时的回调函数
@@ -34,22 +34,31 @@ const sendRequest = (url, method) => {
   return promise
 }
 
-const el = document.querySelector('#test')
-el.addEventListener('click', () => {
-  const url = 'http://127.0.0.1:3000/test', method = 'GET'
-  sendRequest(url, method).then(data => {
-    console.log(data, 'data')
+const el0 = document.querySelector('#test0')
+el0.addEventListener('click', () => {
+  const url = 'http://127.0.0.1:3000/test0', method = 'GET'
+  ajaxRequest(url, method).then(data => {
+    console.log(data, 'data_test0')
   }, error => {
     throw error
   })
 })
 
+
 const el1 = document.querySelector('#test1')
 el1.addEventListener('click', () => {
-  const url = 'http://127.0.0.1:3000/test', method = 'GET'
-  sendRequest(url, method).then(data => {
+  const url = 'http://127.0.0.1:3000/test1'
+  let options = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  fetch(url, options).then(data => {
     console.log(data, 'data')
-  }, error => {
-    throw error
+    console.log(data.json(), 'data.json()')
+    return data.json()
+  }).then(res => {
+    console.log(res, 'test1_res') // res是最终的结果
   })
 })

@@ -33,10 +33,16 @@ const server = http.createServer((req, res) => {
       res.setHeader('Content-Type', 'text/html')
       res.end(data)
     })
-  } else if (pathname === '/test') {//ajax请求
+  } else if (pathname === '/test0') {//ajax请求
     res.statusCode = 200
     res.setHeader('Content-Type', 'application/json')
     const a = { status: 0, data: [{ a: 1, b: 2 }] }
+    const b = JSON.stringify(a)
+    res.end(b)
+  } else if (pathname === '/test1') {//fetch请求
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    const a = { status: 0, data: [{ a: 3, b: 4 }] }
     const b = JSON.stringify(a)
     res.end(b)
   }
